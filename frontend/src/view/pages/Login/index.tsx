@@ -1,8 +1,12 @@
+import { FormProvider } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
+import { ControlledInput } from '../../components/Input';
+import { useLoginController } from './useLoginController';
 
 export function Login() {
+	const { form, errors, handleSubmit } = useLoginController();
+
 	return (
 		<>
 			<header className='flex flex-col items-center gap-4 text-center'>
@@ -16,14 +20,24 @@ export function Login() {
 				</p>
 			</header>
 
-			<form action='' className='mt-[60px] flex flex-col gap-4'>
-				<Input type='email' name='email' placeholder='E-mail ' />
-				<Input type='password' name='password' placeholder='Senha' />
+			<FormProvider {...form}>
+				<form onSubmit={handleSubmit} className='mt-[60px] flex flex-col gap-4'>
+					<ControlledInput control={form.control} type='email' name='email' placeholder='E-mail' />
+					{errors.email && <small>{errors.email.message}</small>}
 
-				<Button type='submit' className='mt-2'>
-					Entrar
-				</Button>
-			</form>
+					<ControlledInput
+						control={form.control}
+						type='password'
+						name='password'
+						placeholder='Senha'
+					/>
+					{errors.password && <small>{errors.password.message}</small>}
+
+					<Button type='submit' className='mt-2'>
+						Entrar
+					</Button>
+				</form>
+			</FormProvider>
 		</>
 	);
 }

@@ -1,21 +1,35 @@
 import type { ComponentProps } from 'react';
+import { type Control, type FieldPath, type FieldValues, useController } from 'react-hook-form';
 
-interface IInput extends ComponentProps<'input'> {
-	name: string;
+interface IControlledInputProps<T extends FieldValues> extends ComponentProps<'input'> {
+	control?: Control<T>;
+	name: FieldPath<T>;
 }
 
-export function Input({ placeholder, id, name, ...props }: IInput) {
+export function ControlledInput<T extends FieldValues>({
+	placeholder,
+	id,
+	name,
+	control,
+	...props
+}: IControlledInputProps<T>) {
 	const inputId = id ?? name;
+
+	const { field } = useController({
+		name,
+		control
+	});
 
 	return (
 		<div className='relative'>
 			<input
-				{...props}
+				{...field}
 				id={inputId}
 				name={name}
 				className='bg-white w-full rounded-lg border border-gray-500 px-3 h-[52px]
         text-gray-800 pt-4 peer placeholder-shown:pt-0 focus:border-gray-800 transition-all outline-none'
 				placeholder=' '
+				{...props}
 			/>
 
 			<label
