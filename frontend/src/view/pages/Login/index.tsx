@@ -5,7 +5,7 @@ import { ControlledInput } from '../../components/Input';
 import { useLoginController } from './useLoginController';
 
 export function Login() {
-	const { form, errors, handleSubmit } = useLoginController();
+	const { form, errors, handleSubmit, isPending } = useLoginController();
 
 	return (
 		<>
@@ -22,18 +22,23 @@ export function Login() {
 
 			<FormProvider {...form}>
 				<form onSubmit={handleSubmit} className='mt-[60px] flex flex-col gap-4'>
-					<ControlledInput control={form.control} type='email' name='email' placeholder='E-mail' />
-					{errors.email && <small>{errors.email.message}</small>}
+					<ControlledInput
+						control={form.control}
+						type='email'
+						name='email'
+						placeholder='E-mail'
+						error={errors.email?.message}
+					/>
 
 					<ControlledInput
 						control={form.control}
 						type='password'
 						name='password'
 						placeholder='Senha'
+						error={errors.password?.message}
 					/>
-					{errors.password && <small>{errors.password.message}</small>}
 
-					<Button type='submit' className='mt-2'>
+					<Button type='submit' className='mt-2' isLoading={isPending}>
 						Entrar
 					</Button>
 				</form>

@@ -4,7 +4,7 @@ import { ControlledInput } from '../../components/Input';
 import { useRegisterController } from './useRegisterController';
 
 export function Register() {
-	const { form } = useRegisterController();
+	const { form, handleSubmit, errors, isPending } = useRegisterController();
 
 	return (
 		<>
@@ -19,19 +19,31 @@ export function Register() {
 				</p>
 			</header>
 
-			<form action='' className='mt-[60px] flex flex-col gap-4'>
-				<ControlledInput control={form.control} name='name' placeholder='Nome' />
+			<form onSubmit={handleSubmit} className='mt-[60px] flex flex-col gap-4'>
+				<ControlledInput
+					control={form.control}
+					name='name'
+					placeholder='Nome'
+					error={errors.name?.message}
+				/>
 
-				<ControlledInput control={form.control} type='email' name='email' placeholder='E-mail' />
+				<ControlledInput
+					control={form.control}
+					type='email'
+					name='email'
+					placeholder='E-mail'
+					error={errors.email?.message}
+				/>
 
 				<ControlledInput
 					control={form.control}
 					type='password'
 					name='password'
 					placeholder='Senha'
+					error={errors.password?.message}
 				/>
 
-				<Button type='submit' className='mt-2'>
+				<Button type='submit' className='mt-2' isLoading={isPending}>
 					Criar conta
 				</Button>
 			</form>
