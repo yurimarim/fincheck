@@ -99,7 +99,3 @@ Siga as instruções abaixo para configurar o projeto em seu ambiente local:
     ```bash
     http://localhost:5173/
     ```
-    
-## 📝 Licença
-
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter mais informações.
