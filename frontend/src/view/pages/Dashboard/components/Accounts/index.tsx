@@ -2,7 +2,7 @@ import 'swiper/css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EyeIcon } from '../../../../components/icons/EyeIcon';
 import { AccountCard } from './AccountCard';
-import { AccountsSliderNavigation } from './AccountsSliderNavigation';
+import { SliderNavigation } from './SliderNavigation';
 import { useAccountsController } from './useAccountsController';
 
 export function Accounts() {
@@ -37,10 +37,7 @@ export function Accounts() {
 						<div className='flex items-center justify-between mb-4' slot='container-start'>
 							<strong className='tracking-[-1px] text-white text-lg'>Minhas Contas</strong>
 
-							<AccountsSliderNavigation
-								isBeginning={sliderState.isBeginning}
-								isEnd={sliderState.isEnd}
-							/>
+							<SliderNavigation isBeginning={sliderState.isBeginning} isEnd={sliderState.isEnd} />
 						</div>
 
 						<SwiperSlide>
