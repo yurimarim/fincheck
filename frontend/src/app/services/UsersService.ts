@@ -1,3 +1,4 @@
+import { sleep } from '../utils/sleep';
 import { httpClient } from './utils/httpClient';
 
 interface IMeResponse {
@@ -8,6 +9,7 @@ interface IMeResponse {
 class UsersService {
 	async me() {
 		const { data } = await httpClient.get<IMeResponse>('/users/me');
+		await sleep();
 
 		return data;
 	}
