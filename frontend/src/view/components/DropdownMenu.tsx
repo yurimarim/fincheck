@@ -8,7 +8,9 @@ function DropdownMenuRoot({ children }: { children: ReactNode }) {
 
 function DropdownMenuTrigger({ children }: { children: ReactNode }) {
 	return (
-		<RdxDropdownMenu.Trigger className='outline-none'>{children}</RdxDropdownMenu.Trigger>
+		<RdxDropdownMenu.Trigger className='outline-none' asChild>
+			{children}
+		</RdxDropdownMenu.Trigger>
 	);
 }
 
@@ -22,9 +24,9 @@ function DropdownMenuContent({ children, className }: IDropdownMenuContentProps)
 		<RdxDropdownMenu.Portal>
 			<RdxDropdownMenu.Content
 				className={cn(
-					`p-2 rounded-2xl bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)]
-          data-[side=bottom]:animate-slide-up-and-fade
-          `,
+					`p-2 rounded-2xl bg-white space-y-2 shadow-[0px_11px_20px_0px_rgba(0,0,0,0.10)] z-50`,
+					'data-[side=bottom]:animate-slide-up-and-fade',
+					'data-[side=top]:animate-slide-down-and-fade',
 					className
 				)}
 			>
@@ -45,7 +47,7 @@ function DropdownMenuItem({ children, className, onSelect }: IDropdownMenuItemPr
 		<RdxDropdownMenu.Item
 			onSelect={onSelect}
 			className={cn(
-				`outline-none min-h-12 flex items-center p-4 px text-sm text-gray-800 data-[highlighted]:bg-gray-50
+				`outline-none min-h-10 flex items-center px-4 py-2 text-sm text-gray-800 data-[highlighted]:bg-gray-50
         rounded-2xl transition-colors cursor-pointer select-none`,
 				className
 			)}
